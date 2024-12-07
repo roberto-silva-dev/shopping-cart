@@ -2,9 +2,11 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.static import serve
 from core.settings import STATIC_ROOT
+from core.views import HomeView
 
 
 urlpatterns = [
+    path('', HomeView.as_view(), name='home'),
     path('admin/', admin.site.urls),
     path('auth/', include('authapp.urls')),
     path('cart/', include('cart.urls')),

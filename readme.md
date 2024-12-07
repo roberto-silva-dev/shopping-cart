@@ -42,12 +42,13 @@ venv\Scripts\activate   # Windows
 pip install -r requirements.txt
 ```
 
-### 4. Configure the database
+### 4. Configure the database and static files
 The project uses SQLite3 by default. No external database setup is required. Just run the migrations:
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
+python manage.py collectstatic
 ```
 
 ### 5. Create initial users and products
