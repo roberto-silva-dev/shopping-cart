@@ -1,0 +1,903 @@
+{
+	"info": {
+		"_postman_id": "5b305183-b35b-4a99-aa74-aed38694014a",
+		"name": "Shopping-Cart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "17204895"
+	},
+	"item": [
+		{
+			"name": "CART",
+			"item": [
+				{
+					"name": "ITEMS",
+					"item": [
+						{
+							"name": "ADD",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Recupera o token CSRF do cookie da resposta anterior\r",
+											"const csrfCookie = pm.cookies.get('csrftoken');\r",
+											"if (csrfCookie) {\r",
+											"    pm.environment.set('csrftoken', csrfCookie);\r",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"product_id\": 1,\r\n    \"quantity\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/cart/items"
+							},
+							"response": [
+								{
+									"name": "ADD",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"product_id\": 1,\r\n    \"quantity\": 2\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{host}}/cart/items"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Sat, 07 Dec 2024 03:53:39 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.12.8"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept, Cookie"
+										},
+										{
+											"key": "Allow",
+											"value": "POST, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "53"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 33,\n    \"name\": \"T-shirt\",\n    \"price\": 35.99,\n    \"quantity\": 2\n}"
+								}
+							]
+						},
+						{
+							"name": "GET",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{host}}/cart/items/30"
+							},
+							"response": [
+								{
+									"name": "GET",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{host}}/cart/items/30"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Sat, 07 Dec 2024 03:55:41 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.12.8"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept, Cookie"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, PATCH, DELETE, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "51"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 30,\n    \"name\": \"Dress\",\n    \"price\": 80.75,\n    \"quantity\": 5\n}"
+								}
+							]
+						},
+						{
+							"name": "UPDATE",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Recupera o token CSRF do cookie da resposta anterior\r",
+											"const csrfCookie = pm.cookies.get('csrftoken');\r",
+											"if (csrfCookie) {\r",
+											"    pm.environment.set('csrftoken', csrfCookie);\r",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"quantity\": 4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/cart/items/30"
+							},
+							"response": [
+								{
+									"name": "UPDATE",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"quantity\": 4\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{host}}/cart/items/30"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Sat, 07 Dec 2024 03:58:54 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.12.8"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept, Cookie"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, PATCH, DELETE, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "51"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 30,\n    \"name\": \"Dress\",\n    \"price\": 80.75,\n    \"quantity\": 4\n}"
+								}
+							]
+						},
+						{
+							"name": "DELETE",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Recupera o token CSRF do cookie da resposta anterior\r",
+											"const csrfCookie = pm.cookies.get('csrftoken');\r",
+											"if (csrfCookie) {\r",
+											"    pm.environment.set('csrftoken', csrfCookie);\r",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{host}}/cart/items/31"
+							},
+							"response": [
+								{
+									"name": "DELETE",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"url": "{{host}}/cart/items/31"
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Sat, 07 Dec 2024 04:00:06 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.12.8"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept, Cookie"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, PATCH, DELETE, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "0"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "LIST",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/cart"
+					},
+					"response": [
+						{
+							"name": "LIST",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{host}}/cart"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 07 Dec 2024 03:53:25 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.8"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "159"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"sum\": 600.25,\n    \"discount\": 90.04,\n    \"total\": 510.21,\n    \"items\": [\n        {\n            \"id\": 30,\n            \"name\": \"Dress\",\n            \"price\": 80.75,\n            \"quantity\": 5\n        },\n        {\n            \"id\": 31,\n            \"name\": \"Jeans\",\n            \"price\": 65.5,\n            \"quantity\": 3\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "SET CSRF TOKEN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Recupera o token CSRF do cookie da resposta anterior\r",
+									"const csrfCookie = pm.cookies.get('csrftoken');\r",
+									"if (csrfCookie) {\r",
+									"    pm.environment.set('csrftoken', csrfCookie);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/auth/csrf"
+					},
+					"response": [
+						{
+							"name": "SET CSRF TOKEN",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{host}}/auth/csrf"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 07 Dec 2024 03:52:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.8"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "csrftoken=PPmrMzuAoGzIfO0N4UEt0Vqk2cYyeyRR; expires=Sat, 06 Dec 2025 03:52:15 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "sessionid=8ez6x7q7jwrkfvdyk4jnumda23p9g2xb; expires=Sat, 21 Dec 2024 03:52:15 GMT; HttpOnly; Max-Age=1209600; Path=/; SameSite=Lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"CSRF token set successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "LOGIN",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Recupera o token CSRF do cookie da resposta anterior\r",
+									"const csrfCookie = pm.cookies.get('csrftoken');\r",
+									"if (csrfCookie) {\r",
+									"    pm.environment.set('csrftoken', csrfCookie);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "{{csrftoken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"vip\",\r\n    \"password\": \"Vip@2024*\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/auth/login"
+					},
+					"response": [
+						{
+							"name": "LOGIN",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"vip\",\r\n    \"password\": \"Vip@2024*\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/auth/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 07 Dec 2024 03:53:14 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.8"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "csrftoken=vdtAOBxZ1Stx17mnj2h8uOyaZNpAoU0b; expires=Sat, 06 Dec 2025 03:53:14 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "sessionid=6rqxerwlf29uofowlrrj48k0t6e9ylx3; expires=Sat, 21 Dec 2024 03:53:14 GMT; HttpOnly; Max-Age=1209600; Path=/; SameSite=Lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"vip\",\n    \"email\": \"vip@email.com\",\n    \"user_type\": \"vip\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PROFILE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/auth/profile"
+					},
+					"response": [
+						{
+							"name": "PROFILE LOGGED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{host}}/auth/profile"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 07 Dec 2024 03:51:47 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.8"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"vip\",\n    \"email\": \"vip@email.com\",\n    \"user_type\": \"vip\"\n}"
+						},
+						{
+							"name": "PROFILE WITHOUT LOGIN",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{host}}/auth/profile"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 07 Dec 2024 03:52:25 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.8"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"session_key\": \"8ez6x7q7jwrkfvdyk4jnumda23p9g2xb\"\n}"
+						}
+					]
+				},
+				{
+					"name": "LOGOUT",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "{{csrftoken}}",
+								"type": "text"
+							}
+						],
+						"url": "{{host}}/auth/logout"
+					},
+					"response": [
+						{
+							"name": "LOGOUT",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{host}}/auth/logout"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 07 Dec 2024 03:52:07 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.8"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Logout successful\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

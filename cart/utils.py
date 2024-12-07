@@ -3,10 +3,12 @@ from core.settings import VIP_PERCENT_DISCOUNT
 
 
 def get_cart(request):
-    if request.user.is_authenticated:
-        cart, _ = Cart.objects.get_or_create(user=request.user)
-    else:
-        cart, _ = Cart.objects.get_or_create(session_key=request.session.session_key)
+    cart, _ = Cart.objects.select_related('user').get_or_create(
+        **(
+            {'user': request.user} if request.user.is_authenticated
+            else {'session_key': request.session.session_key}
+        )
+    )
     return cart
 
 

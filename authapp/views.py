@@ -6,13 +6,22 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
-from authapp.serializers import ProfileSerializer
+from drf_spectacular.utils import extend_schema, OpenApiResponse
+from authapp.serializers import ProfileSerializer, LoginSerializer
 
 
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class LoginView(APIView):
-    permission_classes = [AllowAny]
 
+    @extend_schema(
+        request=LoginSerializer,
+        responses={
+            200: ProfileSerializer,
+            400: OpenApiResponse(description="Bad Request: Validation error or other issue"),
+        },
+        description="Perform the login",
+        summary="Login",
+    )
     def post(self, request):
         if self.request.user.is_authenticated:
             return Response(ProfileSerializer(self.request.user).data)
@@ -31,8 +40,10 @@ class LoginView(APIView):
 
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class GetCsrfTokenView(APIView):
-    # permission_classes = [AllowAny]
-
+    @extend_schema(
+        description="Set the CSRF token on cookies",
+        summary="Set CSRF token cookie",
+    )
     def get(self, request):
         return Response({'message': 'CSRF token set successfully'})
 
@@ -41,6 +52,10 @@ class GetCsrfTokenView(APIView):
 class LogoutView(APIView):
     permission_classes = [AllowAny]
 
+    @extend_schema(
+        description="Logout the current user",
+        summary="Logout user",
+    )
     def post(self, request, *args, **kwargs):
         logout(self.request)
         return Response({'message': 'Logout successful'})
@@ -48,8 +63,14 @@ class LogoutView(APIView):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ProfileView(APIView):
-    permission_classes = [AllowAny]
 
+    @extend_schema(
+        responses={
+            200: ProfileSerializer,
+        },
+        description="Retrieve the current user details if authenticated or session key if not",
+        summary="Profile details",
+    )
     def get(self, request, *args, **kwargs):
         return Response(
             ProfileSerializer(self.request.user).data if self.request.user.is_authenticated else {

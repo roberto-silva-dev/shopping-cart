@@ -17,4 +17,11 @@ class CartItemSerializerIn(serializers.ModelSerializer):
 
     class Meta:
         model = CartItem
-        fields = ['product_id', 'cart', 'quantity']
+        fields = ['product_id', 'quantity']
+
+
+class CartSerializerOut(serializers.Serializer):
+    sum = serializers.FloatField()
+    discount = serializers.FloatField()
+    total = serializers.FloatField()
+    items = CartItemSerializer(many=True)

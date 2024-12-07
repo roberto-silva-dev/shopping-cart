@@ -18,3 +18,4 @@
 */*/.env
 
 /venv
+/staticfiles
