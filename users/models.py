@@ -7,4 +7,4 @@ class CustomUser(AbstractUser):
         ('common', 'Common'),
         ('vip', 'VIP'),
     ]
-    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='common')
+    user_type = models.CharField(max_length=6, choices=USER_TYPE_CHOICES, default='common')

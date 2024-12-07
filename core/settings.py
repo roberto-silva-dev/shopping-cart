@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'products',
     'cart',
 
+    'django_extensions',
     'drf_spectacular',
     'drf_spectacular_sidecar',
 ]
@@ -141,8 +142,9 @@ AUTH_USER_MODEL = 'users.CustomUser'
 VIP_PERCENT_DISCOUNT = 15
 
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',  # Usa o schema do drf-spectacular
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
 SPECTACULAR_SETTINGS = {
     'TITLE': 'API Documentation',
     'DESCRIPTION': 'API documentation',
