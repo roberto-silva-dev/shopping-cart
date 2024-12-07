@@ -77,9 +77,9 @@ The server will be available at [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ---
 
-## 🌐 Testing the API
-
-The project includes a Postman collection to simplify API testing.
+## 🌐 Testing and using the API
+- You can run automatic tests using the command: `python manage.py test`
+- The project includes a Postman collection to simplify API testing/ usage.
 
 ### With Postman
 - Locate the [`docs/postman_collection.json`](docs/postman_collection.json) and [`docs/postman_environment.json`](docs/postman_environment.json) file in the repository.
