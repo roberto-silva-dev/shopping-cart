@@ -72,7 +72,12 @@ class CartItemRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView
         return CartItemSerializerIn
 
     def get_queryset(self):
-        return CartItem.objects.select_related('cart', 'product').filter(cart__user=self.request.user)
+        return CartItem.objects.select_related('cart', 'product').filter(
+            **(
+                {'cart__user': self.request.user} if self.request.user.is_authenticated
+                else {'cart__session_key': self.request.session.session_key}
+            )
+        )
 
     def _get_object_as_dict(self):
         return CartItemSerializer(self.get_object()).data
