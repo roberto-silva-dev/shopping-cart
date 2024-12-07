@@ -13,15 +13,7 @@ class CartItemAPIView(generics.GenericAPIView):
     http_method_names = ['post', 'options']
 
     def get_serializer_class(self):
-        if self.request.method == 'GET':
-            return CartItemSerializer
         return CartItemSerializerIn
-
-    def get_queryset(self):
-        filters = {}
-        if self.request.GET.get('name') is not None:
-            filters['product__name__icontains'] = self.request.GET.get('name')
-        return CartItem.objects.select_related('cart', 'product').filter(cart__user=self.request.user, **filters)
 
     def get_object(self, pk=None):
         try:
@@ -53,13 +45,11 @@ class CartItemAPIView(generics.GenericAPIView):
             serializer = self.get_serializer(instance, data=data, partial=True if instance else False)
             itemcard = serializer.is_valid() and serializer.save(cart=cart)
             if itemcard:
-                return Response(self._get_object_as_dict(itemcard.pk), status=status.HTTP_200_OK)
+                return Response(self._get_object_as_dict(itemcard.pk), status=status.HTTP_200_OK if instance else status.HTTP_201_CREATED)
             return Response({"message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
         except IntegrityError as e:
-            print(e)
             return Response({"message": "Something went wrong on database."}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            print(e)
             return Response({"message": "Something went wrong."}, status=status.HTTP_400_BAD_REQUEST)
 
 
